@@ -61,6 +61,7 @@ export default function TreeItemCustom(props) {
         attribute,
         listException,
         setListException,
+        id,
         ...other
     } = props;
 
@@ -72,7 +73,7 @@ export default function TreeItemCustom(props) {
                 <div className={classes.labelRoot} style={{ color: color }}>
                     <LabelIcon color="inherit" className={classes.labelIcon} />
                     <Typography variant="body2" className={classes.labelText}>
-                        {labelText}
+                    {id} - {labelText}
                     </Typography>
                     <ButtonRules color={color} attribute={attribute} listException={listException}
                         setListException={setListException} />

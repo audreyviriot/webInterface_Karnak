@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function HomePage(props) {
+export default function HomeView(props) {
 
     const classes = useStyles();
 

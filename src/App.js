@@ -7,7 +7,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import HomePage from './Views/HomePage';
+import HomeView from './Views/HomeView';
 import EditView from './Views/EditView';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
@@ -147,7 +147,6 @@ function App() {
               a.anonymizationRule = obj.anonymizationRule;
               a.checked = obj.checked;
               a.isChecked = obj.isChecked;
-              a.custom = obj.custom;
               if (obj.customRule !== undefined) {
                 a.customRule = obj.customRule;
               } else {
@@ -158,7 +157,7 @@ function App() {
           })
           createMatriceConflict(a);
           if (a.isChecked) {
-            ruleToCb(a.checked);
+            ruleToCb(a.ruletoapply);
           }
           return true;
         })
@@ -196,7 +195,7 @@ function App() {
         </Route>
         <Route path="/">
           {arrayConflict.length > 0 ? (
-            <HomePage
+            <HomeView
               setValueCb1={setIsCb1Checked}
               setValueCb2={setIsCb2Checked}
               setValueCb3={setIsCb3Checked}

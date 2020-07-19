@@ -12,8 +12,6 @@ const constructJSON = (listAttributes) => {
             "ruletoapply": attr.ruletoapply,
             "anonymizationRule": attr.anonymizationRule,
             "isChecked": attr.isChecked,
-            "checked" : attr.checked,
-            "custom": attr.custom,
         }
         jsonToSave.push(obj);
         return true;

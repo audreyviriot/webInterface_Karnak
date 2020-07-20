@@ -86,7 +86,8 @@ export default function EditView(props) {
 
     const { listAttributes, valueCb, setValueCb1, setValueCb2, setValueCb3
         , setValueCb4, setValueCb5, setValueCb6, setValueCb7, setValueCb8,
-        setValueCb9, conflictAdvOption, propertiesAdvOpt, setIsImported, setImportedJson } = props;
+        setValueCb9, conflictAdvOption, propertiesAdvOpt, setIsImported, 
+        setImportedJson, setIsCancel } = props;
 
     return (
         <div className={classes.root}>
@@ -103,7 +104,9 @@ export default function EditView(props) {
                         setValueCb6(false);
                         setValueCb7(false);
                         setValueCb8(false);
+                        setValueCb9(false);
                         setIsImported(false);
+                        setIsCancel(true);
                         history.push("/");
                     }}>
                         <CloseIcon />

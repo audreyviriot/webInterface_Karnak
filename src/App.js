@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import dataBase from './Resources/confidentiality_profile_attributes.json';
-import moduleIdFile from './Resources/module_to_attributes.json';
+import dataBase from './Resources/attributes_modules_linked.json';
 import {
   BrowserRouter as Router,
   Switch,
@@ -32,6 +31,7 @@ function App() {
   const tab = [];
   const [importedJson, setImportedJson] = useState();
   const [isImported, setIsImported] = useState(false);
+  const [isCancel, setIsCancel] = useState(false);
 
   //Advanced option
   const propertiesAdvOpt = ["rtnSafePrivOpt", "rtnUIDsOpt", "rtnDevIdOpt",
@@ -105,37 +105,27 @@ function App() {
   }
 
   useEffect(() => {
+
     setAttr([]);
     setAttributes(dataBase);
+    if(isCancel){
+      setIsCancel(false);
+    }
 
     if (!isImported) {
       attributes.map((obj, key) => {
 
-        //Create categories with name
-        moduleIdFile.map((module, key) => {
-          if (obj.tag === module.tag) {
-            var newStr = module.moduleId.split('-').join(' ');
-            obj.moduleId = newStr.charAt(0).toUpperCase() + newStr.substr(1);
-          }
-          return true;
-        })
-
         //Manage conflicts for advanced option
         createMatriceConflict(obj);
 
-        return true;
-      })
-
-      attributes.map((obj, key) => {
         obj.checked = '';
         obj.ruletoapply = 'basicProfile';
         obj.isChecked = false;
         obj.customRule = false;
-        if (obj.moduleId === undefined) {
-          obj.moduleId = "Other";
-        }
+
         return true;
       })
+
 
     } else {
       if (importedJson !== undefined) {
@@ -167,8 +157,7 @@ function App() {
     setAttr(attributes);
     setArrayConflict(tab);
 
-  }, [isImported, setIsImported, setIsCb1Checked, setIsCb2Checked, setIsCb3Checked, setIsCb4Checked,
-    setIsCb5Checked, setIsCb6Checked, setIsCb7Checked, setIsCb8Checked])
+  }, [isImported, setIsImported, isCancel, setIsCancel])
 
   return (
     <Router>
@@ -188,7 +177,7 @@ function App() {
               valueCb={[isCb1Checked, isCb2Checked, isCb3Checked, isCb4Checked,
                 isCb5Checked, isCb6Checked, isCb7Checked, isCb8Checked, isCb9Checked]}
               conflictAdvOption={arrayConflict} propertiesAdvOpt={propertiesAdvOpt} setIsImported={setIsImported}
-              setImportedJson={setImportedJson} />
+              setImportedJson={setImportedJson} setIsCancel={setIsCancel}/>
           ) : (
               <p>Loading</p>
             )}

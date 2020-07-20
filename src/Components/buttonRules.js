@@ -31,8 +31,6 @@ export default function ButtonRules(props) {
 
     const handleChange = (e) => {
 
-        console.log(attribute);
-
         listBtn.forEach((btn) => {
             btn.current.style.color = '';
             btn.current.style.backgroundColor = '';
